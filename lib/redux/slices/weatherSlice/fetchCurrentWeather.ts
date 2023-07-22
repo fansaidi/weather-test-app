@@ -12,5 +12,6 @@ export const fetchCurrentWeather = async (
     icon: result.icon,
     main: result.main,
     description: result.description,
+    name: result.name
   }
 }

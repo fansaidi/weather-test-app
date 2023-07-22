@@ -20,9 +20,10 @@ export const Weather = () => {
   return (
     <div>
       <div className={styles.container}>
+        <h2>{weather.name}</h2>
         <img src={weather.icon} className={styles.icon} alt="weather_icon" />
         <span className={styles.value}>{weather.main}</span>
-        <small>{weather.description}</small>
+        <caption>{weather.description}</caption>
       </div>
       <div className={styles.controls}>
         <input

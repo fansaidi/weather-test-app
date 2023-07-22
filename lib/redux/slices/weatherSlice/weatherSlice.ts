@@ -8,6 +8,7 @@ const initialState: WeatherSliceState = {
   main: null,
   description: null,
   status: 'idle',
+  name: null
 }
 
 export const weatherSlice = createSlice({
@@ -20,6 +21,7 @@ export const weatherSlice = createSlice({
       state.main = action.payload.main
       state.description = action.payload.description
       state.icon = action.payload.icon
+      state.name = action.payload.name
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -34,6 +36,7 @@ export const weatherSlice = createSlice({
         state.main = action.payload.main
         state.description = action.payload.description
         state.icon = action.payload.icon
+        state.name = action.payload.name
       })
   },
 })

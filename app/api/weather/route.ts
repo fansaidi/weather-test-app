@@ -23,7 +23,7 @@ export const fetchWeather = async (
       main: weatherInfo.main,
       description: weatherInfo.description,
       icon: `https://openweathermap.org/img/wn/${weatherInfo.icon}@4x.png`,
-      name: weatherInfo.name
+      name: result.name
     }
   }
 
