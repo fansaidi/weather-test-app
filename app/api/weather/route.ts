@@ -22,7 +22,8 @@ export const fetchWeather = async (
       id: weatherInfo.id,
       main: weatherInfo.main,
       description: weatherInfo.description,
-      icon: `https://openweathermap.org/img/wn/${weatherInfo.icon}@4x.png`
+      icon: `https://openweathermap.org/img/wn/${weatherInfo.icon}@4x.png`,
+      name: weatherInfo.name
     }
   }
 
@@ -31,8 +32,9 @@ export const fetchWeather = async (
 
 /* Types */
 export interface WeatherResponse {
-  id: Number,
-  main: String,
-  description: String,
-  icon: String
+  id: number,
+  main: string,
+  description: string,
+  icon: string,
+  name: string
 }

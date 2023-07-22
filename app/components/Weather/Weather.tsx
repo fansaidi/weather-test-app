@@ -19,12 +19,12 @@ export const Weather = () => {
 
   return (
     <div>
-      <div className={styles.row}>
+      <div className={styles.container}>
         <img src={weather.icon} className={styles.icon} alt="weather_icon" />
         <span className={styles.value}>{weather.main}</span>
         <small>{weather.description}</small>
       </div>
-      <div className={styles.row}>
+      <div className={styles.controls}>
         <input
           className={styles.textbox}
           aria-label="Set increment amount"
@@ -35,7 +35,7 @@ export const Weather = () => {
           className={styles.asyncButton}
           onClick={() => dispatch(getWeatherAsync(cityName))}
         >
-          Submit
+          Check Weather
         </button>
       </div>
     </div>
