@@ -1,10 +1,11 @@
 /* Components */
 import { Counter } from './components/Counter/Counter'
+import { Weather } from './components/Weather/Weather'
 
 export default function IndexPage() {
-  return <Counter />
+  return <Weather />
 }
 
 export const metadata = {
-  title: 'Redux Toolkit',
+  title: 'Weather Test App',
 }
