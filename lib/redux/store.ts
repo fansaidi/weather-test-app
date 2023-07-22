@@ -12,8 +12,10 @@ import {
 } from 'react-redux'
 
 /* Instruments */
-import { reducer } from './rootReducer'
+import { reducer, rootReducer } from './rootReducer'
 import { middleware } from './middleware'
+import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, persistStore } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
 
 const configureStoreDefaultOptions: ConfigureStoreOptions = { reducer }
 
@@ -25,12 +27,25 @@ export const makeReduxStore = (
   return store
 }
 
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
 export const reduxStore = configureStore({
-  reducer,
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(middleware)
+    return getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(middleware)
   },
 })
+
+export const persistor = persistStore(reduxStore)
 export const useDispatch = () => useReduxDispatch<ReduxDispatch>()
 export const useSelector: TypedUseSelectorHook<ReduxState> = useReduxSelector
 
