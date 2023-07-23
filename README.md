@@ -10,5 +10,5 @@ npm install
 
 4. Run
 ```bash
-npx run dev
+npm run dev
 ```
