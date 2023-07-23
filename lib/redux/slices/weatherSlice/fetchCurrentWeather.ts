@@ -1,9 +1,19 @@
-import { WeatherSliceState, } from "./typings"
+import { WeatherSliceState } from '@/lib/redux/typings'
+import { Coordinates } from '@/lib/redux/typings'
+import { useDispatch } from 'react-redux'
 
 export const fetchCurrentWeather = async (
-  cityName = ''
+  query: string | Coordinates
 ): Promise<WeatherSliceState> => {
-  const url = `/api/weather?city=${cityName}`
+  let queryString: string
+  if (typeof query === "string") {
+    queryString = `q=${query}`
+  } else {
+    queryString = `lat=${query.lat}&lon=${query.lon}`
+  }
+
+
+  const url = `/api/weather?${queryString}`
   const response = await fetch(url)
 
   const result = await response.json()
@@ -12,6 +22,8 @@ export const fetchCurrentWeather = async (
     icon: result.icon,
     main: result.main,
     description: result.description,
-    name: result.name
+    name: result.name,
+    lat: result.lat,
+    lon: result.lon
   }
 }

@@ -1,17 +1,20 @@
 /* Core */
+import { WeatherResponse } from '@/lib/redux/typings'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(req: NextRequest, res: Response) {
-  const city = req.nextUrl.searchParams.get('city')
-  const result = await fetchWeather(city)
+  const query = req.nextUrl.searchParams.toString()
+
+  const result = await fetchWeather(query)
 
   return NextResponse.json(result)
 }
 
 export const fetchWeather = async (
-  cityName: string | null
-): Promise<WeatherResponse | undefined> => {
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${process.env.OW_API_KEY}`
+  queryString: string | null
+): Promise<WeatherResponse | unknown> => {
+
+  const url = `https://api.openweathermap.org/data/2.5/weather?${queryString}&appid=${process.env.OW_API_KEY}`
   const response = await fetch(url);
   const result = await response.json();
 
@@ -23,18 +26,11 @@ export const fetchWeather = async (
       main: weatherInfo.main,
       description: weatherInfo.description,
       icon: `https://openweathermap.org/img/wn/${weatherInfo.icon}@4x.png`,
-      name: result.name
+      name: result.name,
+      lat: result.coord.lat,
+      lon: result.coord.lon
     }
   }
 
-  return undefined;
-}
-
-/* Types */
-export interface WeatherResponse {
-  id: number,
-  main: string,
-  description: string,
-  icon: string,
-  name: string
+  return result;
 }

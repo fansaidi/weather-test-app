@@ -43,6 +43,8 @@
   background-color: rgba(112, 76, 182, 0.1);
   border-radius: 2px;
   transition: all 0.15s;
+  margin-right: 4px;
+  border-radius: 5px;
 }
 
 .textbox {
@@ -65,7 +67,6 @@
 .asyncButton {
   composes: button;
   position: relative;
-  border-radius: 5px;
 }
 
 .asyncButton:after {

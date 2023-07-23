@@ -1,6 +1,7 @@
 /* Instruments */
 import { createAppAsyncThunk } from '@/lib/redux/createAppAsyncThunk'
 import { fetchCurrentWeather } from './fetchCurrentWeather'
+import { Coordinates } from '@/lib/redux/typings'
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -9,8 +10,8 @@ import { fetchCurrentWeather } from './fetchCurrentWeather'
 // typically used to make async requests.
 export const getWeatherAsync = createAppAsyncThunk(
   'weather/fetchCurrentWeather',
-  async (cityName: string) => {
-    const response = await fetchCurrentWeather(cityName)
+  async (query: string | Coordinates) => {
+    const response = await fetchCurrentWeather(query)
 
     // The value we return becomes the `fulfilled` action payload
     return response
