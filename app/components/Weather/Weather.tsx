@@ -31,12 +31,6 @@ export const Weather = () => {
     }
   }, [location]);
 
-  useEffect(() => {
-    if (weather.lat && weather.lon) {
-      dispatch(locationSlice.actions.setLocationState({ lat: weather.lat, lon: weather.lon }))
-    }
-  }, [weather]);
-
   const onClickHandler = (cityName: string) => {
     dispatch(locationSlice.actions.setLocationState({ lat: 0, lon: 0 }))
     dispatch(getWeatherAsync(cityName))
